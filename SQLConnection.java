@@ -133,6 +133,16 @@ public class SQLConnection {
 
         con.executeQuery(query);
 
+        //  QUESTION 4
+        System.out.println("\nGetting the names of customers who's orders are always for products with prices over 1,000,000$");
+        waitForKeyPress();
+
+        query = "SELECT cname FROM customers " +
+            "WHERE NOT EXISTS (SELECT * FROM orders, products WHERE orders.cid=customers.cid AND orders.pid=products.pid AND products.price <= 1000000) AND " +
+            "EXISTS (SELECT * FROM orders WHERE orders.cid=customers.cid);";
+
+        con.executeQuery(query);
+
         con.closeConnection();
     }
 }
