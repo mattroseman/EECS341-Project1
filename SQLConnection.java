@@ -42,6 +42,29 @@ public class SQLConnection {
         System.out.println("Connected to mysql server");
     }
 
+    public void ExcecuteQuery(String query) {
+        Statement instruction;
+        ResultSet resultat;
+        try {
+            instruction = connection.createStatement();
+            resultat = instruction.executeQuery(query);
+
+            while (resultat.next()) {
+                System.out.println(resultat.getString(1));
+            }
+        } catch(SQLException e) {
+            HandleException("SQLException: ", e);
+        }
+    }
+
+    public void CloseConnection() {
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            HandleException("SQLException: ", e);
+        }
+    }
+
     private void HandleException(String message, Exception e) {
         System.err.println(message + e.getMessage());
         System.exit(1);
@@ -49,5 +72,9 @@ public class SQLConnection {
 
     public static void main(String[] args) {
         SQLConnection con = new SQLConnection();
+
+        con.ExcecuteQuery("SELECT COUNT(*) FROM orders;");
+
+        con.CloseConnection();
     }
 }
