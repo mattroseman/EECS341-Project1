@@ -86,10 +86,19 @@ public class SQLConnection {
         System.exit(1);
     }
 
+    private static void waitForKeyPress() {
+        System.out.println("Press Any Key to Continue...");
+        try {
+            System.in.read();
+        } catch(IOException e) {
+            handleException("IOException: ", e);
+        }
+    }
+
     public static void main(String[] args) {
         SQLConnection con = new SQLConnection();
 
-        //  Question 1
+        //  QUESTION 1
         String agent = "";
         String query = "";
         Scanner input = new Scanner(System.in);
@@ -105,18 +114,22 @@ public class SQLConnection {
         con.executeQuery(query);
 
 
-        //  Question 2
+        //  QUESTION 2
         System.out.println("\nGetting the cheapest products from each city");
-
-        System.out.println("Press Any Key to Continue...");
-        try {
-            System.in.read();
-        } catch(IOException e) {
-            handleException("IOException: ", e);
-        }
+        waitForKeyPress();
 
         query = "SELECT city, pname, MIN(price) FROM products " +
             "GROUP BY city;";
+
+        con.executeQuery(query);
+
+        //  QUESTION 3
+        String year = "";
+        System.out.println("\nEnter in a year (1970-2016) to get the most expensive products ordered in each month of that year");
+        year = input.nextLine();
+
+        query = "SELECT month, pname, MAX(price) FROM orders NATURAL JOIN products " +
+            "GROUP BY month;";
 
         con.executeQuery(query);
 
