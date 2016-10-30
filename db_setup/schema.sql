@@ -64,7 +64,7 @@ CREATE TABLE `orders` (
   `aid` int(11) NOT NULL,
   `pid` int(11) NOT NULL,
   `qty` int(11) NOT NULL,
-  `dollars` decimal(8,2) DEFAULT NULL,
+  `dollars` decimal(17,2) DEFAULT NULL,
   PRIMARY KEY (`ordno`),
   UNIQUE KEY `ordno` (`ordno`),
   KEY `cid` (`cid`),
@@ -109,7 +109,7 @@ CREATE TABLE `products` (
   `pname` varchar(50) NOT NULL,
   `city` varchar(20) NOT NULL,
   `quantity` int(11) NOT NULL,
-  `price` decimal(5,2) NOT NULL,
+  `price` decimal(11,2) NOT NULL,
   PRIMARY KEY (`pid`),
   UNIQUE KEY `pid` (`pid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1001 DEFAULT CHARSET=utf8;
@@ -124,4 +124,4 @@ CREATE TABLE `products` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-10-29 18:46:56
+-- Dump completed on 2016-10-30 16:14:03
